@@ -1,16 +1,15 @@
-# Apress Source Code
+* 在主线程中无法运行 require 的解决方法：
 
-This repository accompanies [*Electron: From Beginner to Pro*](http://www.apress.com/9781484228258) by Chris Griffith and Leif Wells (Apress, 2017).
+```
+mainWindow = new BrowserWindow({
+   webPreferences: {
+     nodeIntegration: true, // 增加 nodeIntegration： true
+  },
+});
+```
 
-[comment]: #cover
+* 在 render 线程出现的安全提示，解决方法：在主线程中，增加下面一句
 
-
-Download the files as a zip using the green button, or clone the repository to your machine using Git.
-
-## Releases
-
-Release v1.0 corresponds to the code in the published book, without corrections or updates.
-
-## Contributions
-
-See the file Contributing.md for more information on how you can contribute to this repository.
+```
+  process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+```
